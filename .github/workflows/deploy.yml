@@ -9,6 +9,11 @@ jobs:
   deploy:
     runs-on: ubuntu-latest
     steps:
+      - name: Setting up github credentials
+        run: |
+          git config --global user.name "vignesh-pandian-p"
+          git config --global user.email "vigneshpandian0710@gmail.com"
+    
       - name: Checkout code
         uses: actions/checkout@v2
 
