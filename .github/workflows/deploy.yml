@@ -20,8 +20,11 @@ jobs:
       - name: Install dependencies
         run: npm install
 
+      - name: Installing github packages
+        run: npm install --save-dev gh-pages
+
       - name: Build the app
-        run: npm run build
+        run: npm run build --production
 
       - name: Deploy to GitHub Pages
         run: npm run deploy
