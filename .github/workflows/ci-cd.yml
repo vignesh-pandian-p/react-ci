@@ -1,0 +1,46 @@
+name: React CI/CD Pipeline
+# trigerring actions
+on:
+  push:
+    branches:
+      - main
+  pull_request:
+    branches:
+      - main
+# creating jobs
+jobs:
+  # first job is to build and test the code
+  build-and-test:
+    runs-on: ubuntu-latest
+    # steps in the job
+    steps:
+      # 1 step
+      - name: checkout code
+        uses: actions/checkout@v3
+      # 2 step
+      - name: setup nodejs environment
+        uses: actions/setupt-node@v3
+        with:
+          node-version: 22
+      # 3 step - installing dependencies
+      - name: Install dependencies
+        run: npm install
+
+      # 4 step - build the project
+      - name: Building the project
+        run: npm run build
+  # second job is to deploy the code
+  deploy:
+    needs: build-and-test
+    runs-on: ubuntu-latest
+    if: github.ref == 'refs/heads/main'
+
+    steps:
+      - name: Deploy to Github-Pages
+        uses: peaceiris/actions-gh-pages@v3
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          publish_dir: ./build
+    
+      
+          
