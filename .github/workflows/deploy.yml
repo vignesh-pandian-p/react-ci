@@ -35,8 +35,7 @@ jobs:
         run: npm run build --production
 
       - name: Setting up github credentials
-        run: git remote set-url origin https://github.com/${{ github.repository }}.git
-
+        run: git remote set-url origin https://vignesh-pandian-p:${{ secrets.github-login-push }}@github.com/${{ github.repository }}.git
       - name: Deploy to GitHub Pages
         run: npm run deploy
         env:
